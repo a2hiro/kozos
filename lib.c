@@ -41,7 +41,7 @@ int strlen(const char *s)
 
 char *strcpy(char *dst, const char *src)
 {
-  char *d = *dst;
+  char *d = dst;
   for (;;dst++, src++) {
     *dst = *src;
     if (!*src) break;
@@ -52,13 +52,12 @@ char *strcpy(char *dst, const char *src)
 int strcmp(const char *s1, const char *s2)
 {
   while (*s1 || *s2) {
-    if (*s1 != *s2) {
+    if (*s1 != *s2) 
       return (*s1 > *s2) ? 1 : -1;
       s1++;
       s2++;
     }
     return 0;
-  }
 }
 
 int strncmp(const char *s1, const char *s2, int len)
@@ -78,13 +77,6 @@ int putc(unsigned char c)
   if (c == '\n')
     serial_send_byte(SERIAL_DEFAULT_DEVICE, '\r');
   return serial_send_byte(SERIAL_DEFAULT_DEVICE, c);
-}
-
-int puts(unsigned char *str)
-{
-  while (*str)
-    putc(*(str++));
-  return 0;
 }
 
 int puts(unsigned char *str)
